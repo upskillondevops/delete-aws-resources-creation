@@ -1,0 +1,35 @@
+stages:
+- infra
+- delete
+
+variables:
+  DOCKER_REGISTRY: XXXXXXXX.dkr.ecr.us-east-1.amazonaws.com
+#  MANUAL_TRIGGER: "false"
+
+
+
+####------AWS-DEV----#########
+# infra-valid:
+#   stage: infra
+#   trigger:
+#     include:
+#       - local: pipelines/aws-validation.yaml
+#     strategy: depend
+#   allow_failure: true
+
+# infra-deploy:
+#   stage: infra
+#   trigger:
+#     include:
+#       - local: pipelines/aws-infra-dev.yaml
+#     strategy: depend
+#   allow_failure: false
+#   needs:
+#     - job: infra-valid
+delete:
+  stage: delete
+  trigger:
+    include:
+      - local: pipelines/cleanup.yaml
+    strategy: depend
+  allow_failure: false
