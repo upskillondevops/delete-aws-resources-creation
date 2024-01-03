@@ -6,9 +6,6 @@ Parameters:
     Type: String
     Description: The name of the S3 Bucket
     AllowedPattern: "^([a-z0-9]{1}[a-z0-9-]{1,61}[a-z0-9]{1})$"
-  KmsMasterKeyAlias:
-    Type: AWS::SSM::Parameter::Value<String>
-    Description: KMS service catalog value pulled from parameters store
   S3LoggingBucketName:
     Type: String
     Description: S3LoggingBucketName
@@ -25,13 +22,6 @@ Resources:
         BlockPublicPolicy: true
         IgnorePublicAcls: true
         RestrictPublicBuckets: true
-      VersioningConfiguration:
-        Status: Enabled
-      BucketEncryption:
-        ServerSideEncryptionConfiguration:
-        - ServerSideEncryptionByDefault:
-            SSEAlgorithm: aws:kms
-            KMSMasterKeyID: !Ref KmsMasterKeyAlias
       LoggingConfiguration:
         DestinationBucketName: !Ref S3LoggingBucket
         LogFilePrefix: !Ref SwaggerBucket
@@ -61,14 +51,6 @@ Resources:
         BlockPublicPolicy: true
         IgnorePublicAcls: true
         RestrictPublicBuckets: true
-      VersioningConfiguration:
-        Status: Enabled
-      ##AccessControl: LogDeliveryWrite
-      BucketEncryption:
-        ServerSideEncryptionConfiguration:
-        - ServerSideEncryptionByDefault:
-            SSEAlgorithm: aws:kms
-            KMSMasterKeyID: !Ref KmsMasterKeyAlias
 
   LoggingBucketPolicy:
     Type: 'AWS::S3::BucketPolicy'

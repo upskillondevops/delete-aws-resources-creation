@@ -3,10 +3,9 @@ stages:
 cleanup:
   stage: cleanup
   image:
-    name: $AWS_CLI_IMAGE
+    name: amazon/aws-cli:latest
     entrypoint: [""]
   script:
-    - *assume-role
     - pwd
     - ls
     - cd /builds/upskillondevops/docker-awsecr/IaaC/AWS/scripts
@@ -14,8 +13,8 @@ cleanup:
     - echo "executing S3 content and bucket script"
     - chmod +x delete-s3-object.sh
     - ./delete-s3-object.sh
-    # - ls
-    # - echo "executing cft deletion script"
-    # - chmod +x delete-cft.sh
-    # - ./delete-cft.sh
-    # - ls
+    - ls
+    - echo "executing cft deletion script"
+    - chmod +x delete-cft.sh
+    - ./delete-cft.sh
+    - ls

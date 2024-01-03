@@ -6,9 +6,5 @@
     {
         "ParameterKey": "S3LoggingBucketName",
         "ParameterValue": "appmod-appcont-dev-logging"
-    },
-    {
-        "ParameterKey": "KmsMasterKeyAlias",
-        "ParameterValue": "/MyApp/KMSKeyId"
     }
 ]
